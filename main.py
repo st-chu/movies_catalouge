@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def homepage():
     movies = []
+
     for item in range(1, 10):
         movies.append('film')
 
