@@ -3,9 +3,7 @@ import random
 from typing import List, Dict, Union
 
 
-token = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZDVkOWRlZTdjMzEwMjlkZWQ2NDBkYzE3NTEwNTg3YSIsInN1YiI6IjVmZDhmN' \
-            '2NjMWYzZTYwMDAzZmIyOTJiMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ewqO0KDgM6YtYjqzvQNBrZ-xgdk' \
-            'A7nl1DBn5hO9XnL0'
+token = '****************'
 
 
 base_url = 'https://api.themoviedb.org/3/'
@@ -16,14 +14,15 @@ def get_movies_list(list_name: str) -> Dict[str, Union[int, List[Dict[str, Union
     headers = {
         'Authorization': token,
     }
-    r = requests.get(url=endpoint, headers=headers)
-    r.raise_for_status()
-    return r.json()
+    response = requests.get(url=endpoint, headers=headers)
+    response.raise_for_status()
+    return response.json()
 
 
 def get_movies(how_many: int, list_name: str) -> List[Dict[str, Union[bool, str, List[int], int, float]]]:
     movies = get_movies_list(list_name)
-    return movies['results'][:how_many]
+    random_movies = [movies['results'].pop(random.randint(0, len(movies['results'])-1)) for movie in range(how_many)]
+    return random_movies
 
 
 def image_url(file_path: str, file_size="w342") -> str:

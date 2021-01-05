@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="container">
-
+{% if info %}
+    <h1 class="my-4">Brak danych dotyczących tytułu "{{ info.title }}"</h1>
+{% else %}
    <h1 class="my-4">
        {{ movie.title }}
    </h1>
@@ -39,7 +41,7 @@
                            {% endif %}
                            <figcaption class="figure-caption"><strong>{{ actor.name }}</strong>
                                {% if actor.character %}
-                               <br>as {{ actor.character }} {{ actor.id }}
+                               <br>as {{ actor.character }}
                                {% endif %}
                            </figcaption>
                        </figure>
@@ -48,5 +50,7 @@
            {% endif %}
        {% endfor %}
    </div>
+{% endif %}
  </div>
+
 {% endblock %}

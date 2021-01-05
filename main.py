@@ -11,12 +11,11 @@ app = Flask(__name__)
 def homepage():
     movies_list = ['popular', 'now_playing', 'upcoming', 'top_rated', 'niepoprawna_wartość']
     selected_list = request.args.get('list_type', 'popular')
-    print(FAVORITES)
     try:
-        movie = tmdb_client.get_movies(8, selected_list)
+        movie = tmdb_client.get_movies(12, selected_list)
         return render_template('homepage.html', movies=movie, movies_list=movies_list, selected_list=selected_list)
     except:
-        movie = tmdb_client.get_movies(8, 'popular')
+        movie = tmdb_client.get_movies(12, 'popular')
         return render_template('homepage.html', movies=movie, movies_list=movies_list, selected_list='popular')
 
 
@@ -30,10 +29,14 @@ def utility_processor():
 
 @app.route("/movie/<int:movie_id>")
 def movie_details(movie_id):
-    details = tmdb_client.get_single_movie(movie_id)
-    cast = tmdb_client.get_single_movie_cast(movie_id)
-    image = tmdb_client.get_movie_image(movie_id)
-    return render_template("movie_details.html", movie=details, cast=cast, image_path=image)
+    try:
+        details = tmdb_client.get_single_movie(movie_id)
+        cast = tmdb_client.get_single_movie_cast(movie_id)
+        image = tmdb_client.get_movie_image(movie_id)
+        return render_template("movie_details.html", movie=details, cast=cast, image_path=image)
+    except IndexError:
+        info = tmdb_client.get_single_movie(movie_id)
+        return render_template("movie_details.html", info=info)
 
 
 @app.route("/search")
@@ -60,11 +63,9 @@ def tv_today():
 @app.route("/favorites/add", methods=['POST'])
 def add_to_favourites():
     movie_id = request.form.get('movie_id')
-    selected_list = request.args.get('list_type') tu
-    print(selected_list)
     if movie_id:
         FAVORITES.add(movie_id)
-    return redirect(url_for('homepage', selected_list=selected_list)) tu
+    return redirect(url_for('homepage'))
 
 
 if __name__ == '__main__':
