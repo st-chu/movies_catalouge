@@ -1,0 +1,56 @@
+
+projekt
+|
+|__movies_catalouge
+|  |
+|  |_main.py
+|  |_tmdb_client.py
+|  |___init__.py
+|  |_tests
+|  |  |
+|  |  |_test_tmdb.py
+|  |  |___init__.py
+|  |  
+|  |_templates
+|     |...
+|
+|_venv
+
+
+W tej konfiguracji po odpaleniu flaska wyświetla mi się błąd flask.cli.NoAppException (zdj1),
+pusty plik __init__.py znajduje się w katalogu movies_catalouge dziępi czemu po uruchomieniu pytest
+możliwe jest wykonanie testów funkcji znajdujących się w tmdb_client.py
+
+tmdb_client.py importuje w katalogu test_tmdb.py w następujący sposób:
+
+   from movies_catalouge import tmdb_client
+
+
+w module main.py import tmdb_client.py przeprowadzam następująco:
+
+   import tmdb_client
+   
+--------------------------------------------------------------------------------------------------------
+
+projekt
+|
+|__movies_catalouge
+|  |
+|  |_main.py
+|  |_tmdb_client.py
+|  |
+|  |_tests
+|  |  |
+|  |  |_test_tmdb.py
+|  |  |___init__.py
+|  |  
+|  |_templates
+|     |...
+|
+|_venv
+
+W sytuacji kiedy usuwam plik __init__.py z katalogu movies_catalouge flask zaczyna mi działać, 
+za to nie jestem w stanie wykonać testow w pytest(zdj2).
+
+Co w tutaj robię źle?
+
