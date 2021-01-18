@@ -3,9 +3,7 @@ import random
 from typing import List, Dict, Union
 
 
-token = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZDVkOWRlZTdjMzEwMjlkZWQ2NDBkYzE3NTEwNTg3YSIsInN1YiI6IjVmZDhmN' \
-            '2NjMWYzZTYwMDAzZmIyOTJiMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ewqO0KDgM6YtYjqzvQNBrZ-xgdk' \
-            'A7nl1DBn5hO9XnL0'
+token = 'Bearer ***********************'
 
 
 base_url = 'https://api.themoviedb.org/3/'
