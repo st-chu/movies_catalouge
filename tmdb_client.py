@@ -3,7 +3,7 @@ import random
 from typing import List, Dict, Union
 
 
-token = 'Bearer ***********************'
+token = 'Bearer***************
 
 
 base_url = 'https://api.themoviedb.org/3/'
