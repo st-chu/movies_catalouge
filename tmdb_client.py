@@ -1,10 +1,9 @@
 import requests
 import random
 from typing import List, Dict, Union
+import os
 
-
-token = 'Bearer***************
-
+API_TOKEN = os.environ.get("TMDB_API_TOKEN", "")
 
 base_url = 'https://api.themoviedb.org/3/'
 
@@ -14,11 +13,11 @@ def get_endpoint_full_url(target: str) -> str:
 
 
 def get_headers(my_token: str) -> Dict[str, str]:
-    return {"Authorization": my_token}
+    return {"Authorization": f"Bearer {my_token}"}
 
 
 def call_tmdb_api(endpoint: str) -> Dict[str, Union[int, List[Dict[str, Union[str, bool, int, float, List[int]]]]]]:
-    headers = get_headers(token)
+    headers = get_headers(API_TOKEN)
     response = requests.get(get_endpoint_full_url(endpoint), headers=headers)
     response.raise_for_status()
     return response.json()
@@ -57,14 +56,14 @@ def get_movie_image(movie_id: int):
 
 def search(search_query: str):
     endpoint = f'https://api.themoviedb.org/3/search/movie?query={search_query}'
-    headers = {'Authorization': token}
+    headers = {'Authorization': f"Bearer {API_TOKEN}"}
     response = requests.get(endpoint, headers=headers)
     return response.json()['results']
 
 
 def get_tv_airing_today():
     endpoint = f'{base_url}tv/airing_today?language=pl-PL'
-    headers = {'Authorization': token}
+    headers = {'Authorization': f"Bearer {API_TOKEN}"}
     response = requests.get(endpoint, headers=headers)
     response.raise_for_status()
     return response.json()['results']
